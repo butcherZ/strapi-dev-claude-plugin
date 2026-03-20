@@ -82,7 +82,7 @@ gh pr create --base <base-branch> --title "<title>" --body "<description>"
 
 ### Step 7: Strapi Docs Reminder
 
-If the `bugfix:docs-update` phase identified Strapi documentation changes, remind the user:
+If the `strapi-dev:docs-update` phase identified Strapi documentation changes, remind the user:
 
 "Don't forget the Strapi docs change. Here's what to submit to `strapi/documentation`:"
 - Show the proposed file path and change

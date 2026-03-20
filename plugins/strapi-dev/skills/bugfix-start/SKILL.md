@@ -1,5 +1,5 @@
 ---
-name: start
+name: bugfix-start
 description: Use when starting a full bug-fixing workflow from a Linear ticket or GitHub issue. Orchestrates analysis, fix, docs update, Obsidian documentation, and PR creation with checkpoints between each phase.
 argument-hint: <ticket-id-or-url>
 ---
@@ -43,7 +43,7 @@ Execute each phase in order. Use the Skill tool to invoke each phase command. Af
 
 ### Phase 1: Analyze
 
-Use the Skill tool: `skill: "bugfix:analyze", args: "<ticket-input>"`
+Use the Skill tool: `skill: "strapi-dev:bugfix-analyze", args: "<ticket-input>"`
 
 This phase will:
 - Fetch the ticket context
@@ -57,7 +57,7 @@ This phase will:
 
 ### Phase 2: Fix
 
-Use the Skill tool: `skill: "bugfix:fix"`
+Use the Skill tool: `skill: "strapi-dev:bugfix-fix"`
 
 This phase has **two internal checkpoints:**
 1. After proposing fixes: "Which approach do you want to go with?"
@@ -65,20 +65,20 @@ This phase has **two internal checkpoints:**
 
 ### Phase 3: Docs Update
 
-Use the Skill tool: `skill: "bugfix:docs-update"`
+Use the Skill tool: `skill: "strapi-dev:docs-update"`
 
 **If updates needed:** "These docs reference the changed behavior. Approve the updates?"
 **If no updates needed:** "No documentation updates needed, moving on." (proceeds without pausing)
 
 ### Phase 4: Obsidian Note
 
-Use the Skill tool: `skill: "bugfix:obsidian"`
+Use the Skill tool: `skill: "strapi-dev:obsidian"`
 
 **Checkpoint:** "Here's the Obsidian note. Want to adjust anything before I save it?"
 
 ### Phase 5: PR
 
-Use the Skill tool: `skill: "bugfix:pr"`
+Use the Skill tool: `skill: "strapi-dev:pr"`
 
 **Checkpoint:** "Here's the PR description. Want to adjust anything before I create the PR?"
 

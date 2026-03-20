@@ -1,5 +1,5 @@
 ---
-name: fix
+name: bugfix-fix
 description: Use when a bug has been analyzed and you need to find the root cause, propose fix options, and implement the chosen fix with tests. Follows TDD and systematic debugging.
 ---
 
@@ -9,7 +9,7 @@ Find the root cause, propose fix options, and implement the chosen fix with test
 
 ## Input
 
-**When run via orchestrator:** Receives analysis context from `bugfix:analyze` (bug summary, affected code, reproduction result, initial hypothesis).
+**When run via orchestrator:** Receives analysis context from `strapi-dev:bugfix-analyze` (bug summary, affected code, reproduction result, initial hypothesis).
 
 **When run standalone:** Ask the user to describe:
 1. What is the bug? (symptoms, error messages)

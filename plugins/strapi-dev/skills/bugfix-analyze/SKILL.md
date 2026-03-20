@@ -1,5 +1,5 @@
 ---
-name: analyze
+name: bugfix-analyze
 description: Use when starting a bug investigation from a Linear ticket, GitHub issue, or plain text description. Fetches ticket context, explores affected code, and attempts reproduction.
 argument-hint: <ticket-id-or-url>
 ---

@@ -1,15 +1,17 @@
 ---
 name: docs-update
-description: Use after a bug fix to check if project documentation or Strapi documentation needs updating based on the code changes made.
+description: Use after a bug fix or during a PR review to check if project documentation or Strapi documentation needs updating based on the code changes.
 ---
 
 # Documentation Update Check
 
-Check if the bug fix requires updates to internal project docs or Strapi documentation.
+Check if the changes require updates to internal project docs or Strapi documentation.
 
 ## Input
 
-**When run via orchestrator:** Has context of what code changed from `bugfix:fix`.
+**When run via bugfix orchestrator:** Has context of what code changed from `strapi-dev:bugfix-fix`.
+
+**When run via review orchestrator:** Receives the PR diff content directly as context from `strapi-dev:review-start`.
 
 **When run standalone:** Must be on a branch with changes. Claude will read the diff to understand what changed.
 
