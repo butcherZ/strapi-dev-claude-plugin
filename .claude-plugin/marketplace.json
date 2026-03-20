@@ -5,13 +5,13 @@
   },
   "plugins": [
     {
-      "name": "bugfix",
-      "description": "Modular bug-fixing workflow — from Linear/GitHub ticket to PR with Obsidian documentation",
-      "version": "1.0.0",
+      "name": "strapi-dev",
+      "description": "Strapi development workflows — bug fixing, PR review, and documentation",
+      "version": "2.0.0",
       "author": {
         "name": "butcherZ"
       },
-      "source": "./plugins/bugfix",
+      "source": "./plugins/strapi-dev",
       "category": "development"
     }
   ]

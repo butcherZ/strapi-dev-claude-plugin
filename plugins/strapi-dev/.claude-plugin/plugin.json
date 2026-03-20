@@ -1,0 +1,12 @@
+{
+  "name": "strapi-dev",
+  "description": "Strapi development workflows — bug fixing, PR review, and documentation",
+  "version": "2.0.0",
+  "author": {
+    "name": "butcherZ"
+  },
+  "homepage": "https://github.com/butcherZ/claude-bugfix-workflow",
+  "repository": "https://github.com/butcherZ/claude-bugfix-workflow",
+  "license": "MIT",
+  "keywords": ["strapi", "bugfix", "review", "workflow", "linear", "obsidian", "debugging"]
+}
