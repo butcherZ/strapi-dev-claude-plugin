@@ -55,25 +55,46 @@ Use the Skill tool: `skill: "strapi-dev:review-analyze", args: "pass:1 <PR-metad
 
 Pass the PR title, description, changed files list, and diff.
 
-**Checkpoint:** "Does this match your read of the PR? Any corrections before I check for breaking changes?"
-- If user has corrections → incorporate, re-present
-- If user says yes → proceed to Phase 2
+**Checkpoint:** Present the code vs description analysis above, then show:
+
+```
+  [1] Looks right — check for breaking changes
+  [2] I have corrections (describe them)
+  [3] Dig deeper into a specific file
+  [4] Stop here
+```
+
+Wait for the user's selection. If `[2]`, incorporate corrections and re-present analysis with the same menu. If `[3]`, investigate the specified file and re-present. If `[4]`, stop the review.
 
 ### Phase 2: Breaking Changes
 
 Use the Skill tool: `skill: "strapi-dev:review-analyze", args: "pass:2 <PR-metadata + Phase 1 findings>"`
 
-**Checkpoint:** "Any areas you want me to dig deeper into before I look at alternatives?"
-- If user wants deeper analysis → investigate specific areas, re-present
-- If user says yes → proceed to Phase 3
+**Checkpoint:** Present the breaking change analysis above, then show:
+
+```
+  [1] Continue to alternatives
+  [2] Dig deeper into a specific area
+  [3] I think you missed something (describe it)
+  [4] Stop here
+```
+
+Wait for the user's selection. If `[2]`, investigate the specified area and re-present with the same menu. If `[3]`, investigate what they described and re-present. If `[4]`, stop the review.
 
 ### Phase 3: Alternative Approaches
 
 Use the Skill tool: `skill: "strapi-dev:review-analyze", args: "pass:3 <PR-metadata + Phase 1-2 findings>"`
 
-**Checkpoint:** "Thoughts on these alternatives? Ready to hunt for bugs?"
-- If user wants to discuss → explore the alternatives further
-- If user says yes → proceed to Phase 4
+**Checkpoint:** Present the alternative approaches above, then show:
+
+```
+  [1] Continue to bug hunting
+  [2] Explore an alternative further (specify which)
+  [3] I disagree with the recommendation (describe why)
+  [4] Stop here
+```
+
+Wait for the user's selection. If `[2]`, explore the specified alternative in more depth and re-present. If `[3]`, discuss the disagreement and revise the recommendation if warranted, then re-present. If `[4]`, stop the review.
 
 ### Phase 4: Bug Hunting
 
@@ -81,9 +102,16 @@ Use the Skill tool: `skill: "strapi-dev:review-bugs"`
 
 Pass all accumulated context: PR metadata, analysis findings, breaking change assessment.
 
-**Checkpoint:** "Here are the bugs found (or none found). Want to proceed to check docs impact?"
-- If user wants to investigate further → continue bug hunting
-- If user says yes → proceed to Phase 5
+**Checkpoint:** Present the bug report above, then show:
+
+```
+  [1] Continue to docs check
+  [2] Investigate another area for bugs (specify)
+  [3] Dispute a reported bug (specify which)
+  [4] Stop here
+```
+
+Wait for the user's selection. If `[2]`, investigate the specified area and update the bug report, then re-present with the same menu. If `[3]`, re-examine the disputed bug and remove it from the report if unconfirmed, then re-present. If `[4]`, stop the review.
 
 ### Phase 5: Documentation Impact
 
@@ -91,8 +119,7 @@ Use the Skill tool: `skill: "strapi-dev:docs-update"`
 
 Pass the PR diff content as context so the skill can analyze without needing a local branch diff.
 
-**If updates needed:** "These docs reference changed behavior. Here's what would need updating."
-**If no updates needed:** "No documentation updates needed."
+`docs-update` handles its own numbered checkpoint menus internally. Wait for the skill to complete before presenting the final summary. No separate Phase 5 checkpoint is needed here.
 
 ## Summary
 
