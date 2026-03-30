@@ -107,17 +107,51 @@ Restart Claude Code to load the plugin.
 
 Each phase can also be run independently.
 
-## Docs Update Pipeline (v2.1)
+## docs-update: Router + Drafter Pipeline
 
-`docs-update` uses a Router → Drafter agent pipeline fetched from `strapi/documentation` at runtime:
+`docs-update` checks whether a code change requires documentation updates — in the current repo and in `strapi/documentation`. It runs a 6-step pipeline and presents numbered checkpoints at every decision point.
 
-1. **Detect** — analyzes the diff for doc-relevant changes (API behavior, config, errors, etc.)
-2. **Internal docs** — searches the current repo for outdated references
-3. **Router** — fetches `agents/prompts/router.md` from `strapi/documentation` to determine which Strapi doc pages need updating and what action to take
-4. **Drafter** — fetches `agents/prompts/drafter.md` to write style-compliant MDX content for each target page
-5. **Final output** — presents changes ready for manual submission to `strapi/documentation`
+### Steps
 
-The skill never auto-creates a PR on `strapi/documentation`. Numbered checkpoints at every decision point.
+**Step 1: Get the diff** — reads `git diff` from the branch (standalone) or uses the diff passed in from the orchestrator.
+
+**Step 2: Detect doc-relevant changes** — analyzes the diff for things that affect documentation: API endpoint behavior, config options, error messages, CLI flags, env vars, breaking interface changes. Exits silently if nothing doc-relevant is found.
+
+**Step 3: Internal project docs** — searches `README.md`, `docs/`, `CONTRIBUTING.md`, and inline docstrings for references to the changed behavior. If outdated references are found, presents a before/after diff with a checkpoint:
+```
+  [1] Approve — apply the updates
+  [2] Adjust the proposed changes
+  [3] Skip docs update
+  [4] Stop here
+```
+
+**Step 4: Router** — fetches `agents/prompts/router.md`, `docusaurus/sidebars.js`, and `docusaurus/static/llms.txt` from `strapi/documentation` via GitHub MCP. Runs the Router prompt against the diff to produce a YAML report of target pages, actions (`update_section`, `add_section`, `create_page`, `add_row`, `add_link`, etc.), and priorities. Presents a checkpoint:
+```
+  [1] Approve — proceed to drafting
+  [2] Remove a target
+  [3] Adjust a target
+  [4] Stop here
+```
+If the Router returns no targets, the skill exits: no Strapi doc changes needed.
+
+**Step 5: Drafter** — fetches `agents/prompts/drafter.md` from `strapi/documentation` (only after the Router checkpoint passes). For each target, fetches the existing page content (skipped for `create_page` targets) and runs the Drafter prompt to produce style-compliant MDX. Selects mode automatically based on action type:
+- `create_page` / `add_section` → **Compose**
+- `update_section` / `update_text` / `add_row` → **Patch**
+- `add_link` / `add_mention` / `add_tip` → **Micro-edit**
+
+Presents all drafted changes with a checkpoint:
+```
+  [1] Approve — present for submission
+  [2] Regenerate a specific change
+  [3] Edit a change manually
+  [4] Stop here
+```
+
+**Step 6: Final output** — presents each change as ready-to-paste MDX with file path and action type. No PR is created. No file in `strapi/documentation` is modified directly. The user submits manually.
+
+### Fallback
+
+If GitHub MCP is unavailable, the skill falls back to `gh api search/code` against `strapi/documentation` and presents a rough suggested edit. It flags that Router placement analysis and Drafter style compliance are not available without GitHub MCP.
 
 ## Uninstall
 
