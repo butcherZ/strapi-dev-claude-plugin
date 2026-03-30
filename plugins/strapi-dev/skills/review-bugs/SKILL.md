@@ -86,6 +86,19 @@ For each confirmed bug:
 
 **IMPORTANT:** Do NOT commit any changes. Leave all files (tests + fixes) unstaged. The user decides what to keep.
 
+### Checkpoint
+
+After presenting the bug report, show:
+
+```
+  [1] Looks good — proceed
+  [2] Investigate another area (specify)
+  [3] Dispute a reported bug (specify which)
+  [4] Stop here
+```
+
+Wait for the user's selection. If `[2]`, investigate the specified area, update the report, and re-present with the same menu. If `[3]`, re-examine the disputed bug — remove it from the report if the test no longer fails or the scenario is invalid — and re-present. If `[4]`, stop leaving all files unstaged.
+
 ### Step 4: Present Report
 
 **Output format when bugs are found:**
