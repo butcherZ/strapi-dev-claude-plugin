@@ -64,7 +64,16 @@ Compare against the stated intent:
 - **Accurate:** <things that match between description and code>
 ```
 
-**Checkpoint (standalone only):** "Does this match your read of the PR?"
+**Checkpoint (standalone only):** Present the code vs description analysis above, then show:
+
+```
+  [1] Looks right — continue
+  [2] I have corrections (describe them)
+  [3] Dig deeper into a specific area
+  [4] Stop here
+```
+
+Wait for the user's selection. If `[2]`, incorporate corrections and re-present. If `[3]`, investigate the specified area and re-present. If `[4]`, stop.
 
 ---
 
@@ -121,7 +130,16 @@ For each changed file, determine whether the change could affect Strapi users.
 - (or "No user-facing behavior changes detected")
 ```
 
-**Checkpoint (standalone only):** "Any areas you want me to dig deeper into?"
+**Checkpoint (standalone only):** Present the breaking change analysis above, then show:
+
+```
+  [1] Looks right — continue
+  [2] I have corrections (describe them)
+  [3] Dig deeper into a specific area
+  [4] Stop here
+```
+
+Wait for the user's selection. If `[2]`, incorporate corrections and re-present. If `[3]`, investigate the specified area and re-present. If `[4]`, stop.
 
 ---
 
@@ -170,7 +188,16 @@ Identify the problem the PR is solving and propose 2-3 alternative ways to solve
 <which approach is best and why — could be the PR's current approach>
 ```
 
-**Checkpoint (standalone only):** "Thoughts on these alternatives?"
+**Checkpoint (standalone only):** Present the alternative approaches above, then show:
+
+```
+  [1] Looks right — continue
+  [2] Explore an alternative further (specify which)
+  [3] I disagree with the recommendation (describe why)
+  [4] Stop here
+```
+
+Wait for the user's selection. If `[2]`, explore the specified alternative further and re-present. If `[3]`, discuss and revise the recommendation if warranted, then re-present. If `[4]`, stop.
 
 ## Key Principle
 
