@@ -100,7 +100,16 @@ Based on [evidence], the likely root cause is [hypothesis].
 This will be verified in the fix phase.
 ```
 
-**Checkpoint:** "Here's my analysis. Does this match your understanding? Ready to move to finding the fix?"
+**Checkpoint:** Present the analysis summary above, then show:
+
+```
+  [1] Looks right — proceed to fix
+  [2] I have corrections (describe them)
+  [3] Dig deeper into a specific area
+  [4] Stop here
+```
+
+Wait for the user's selection. If `[2]`, incorporate their corrections and re-present the analysis with the same menu. If `[3]`, investigate the specified area and re-present. If `[4]`, stop the workflow leaving no changes.
 
 ## Key Principle
 
