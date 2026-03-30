@@ -71,7 +71,16 @@ Keep under 70 characters.
 
 Show the complete PR (title + description) to the user.
 
-**Checkpoint:** "Here's the PR description. Want to adjust anything before I create the PR?"
+**Checkpoint:** Present the PR title and description above, then show:
+
+```
+  [1] Create the PR
+  [2] Edit the title
+  [3] Edit the description
+  [4] Stop here
+```
+
+Wait for the user's selection. If `[2]`, ask for the new title, update, and re-present with the same menu. If `[3]`, ask what to change in the description, apply, and re-present. If `[4]`, stop leaving the branch pushed but no PR created.
 
 ### Step 6: Create PR
 
