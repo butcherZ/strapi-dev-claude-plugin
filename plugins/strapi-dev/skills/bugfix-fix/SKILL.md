@@ -63,7 +63,17 @@ Propose **2-3 fix options** (when applicable — simple bugs may only have one r
 **Recommendation:** Option A because [reasoning].
 ```
 
-**Checkpoint 1:** "Which approach do you want to go with?"
+**Checkpoint 1:** Present the fix options above, then show (replace `<name>` with the actual option names; omit `[3]` if only 2 options):
+
+```
+  [1] Option A — <name>
+  [2] Option B — <name>
+  [3] Option C — <name>
+  [4] Explain the trade-offs again
+  [5] Stop here
+```
+
+Wait for the user's selection. If `[4]`, re-explain trade-offs and re-present the same menu. If `[5]`, stop leaving no changes.
 
 ### Step 3: Implement the Fix
 
@@ -87,7 +97,17 @@ Follow TDD:
    - Stage only the relevant files
    - Commit to the current `fix/<slug>` branch
 
-**Checkpoint 2:** "Fix implemented and tests pass. Here's a summary of changes. Ready to check docs?"
+**Checkpoint 2:** Present the summary of changes above, then show:
+
+```
+  [1] Looks good — check docs
+  [2] Show me the diff
+  [3] Run the tests again
+  [4] I want a different approach (back to options)
+  [5] Stop here
+```
+
+Wait for the user's selection. If `[2]`, run `git diff HEAD` and re-present. If `[3]`, re-run the test suite and re-present results with the same menu. If `[4]`, return to Checkpoint 1 with the same options. If `[5]`, stop leaving changes uncommitted.
 
 ## Error Handling
 
