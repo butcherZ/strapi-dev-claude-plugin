@@ -51,36 +51,31 @@ This phase will:
 - Attempt to reproduce the bug
 - Present a structured analysis
 
-**Checkpoint:** "Here's my analysis. Does this match your understanding? Ready to move to finding the fix?"
-- If user says yes → proceed to Phase 2
-- If user has corrections → incorporate them, re-present analysis
+`bugfix-analyze` presents a numbered checkpoint menu. Wait for the user to select **[1] Looks right — proceed to fix** before continuing to Phase 2. The sub-skill handles all other selections.
 
 ### Phase 2: Fix
 
 Use the Skill tool: `skill: "strapi-dev:bugfix-fix"`
 
-This phase has **two internal checkpoints:**
-1. After proposing fixes: "Which approach do you want to go with?"
-2. After implementing: "Fix implemented and tests pass. Here's a summary of changes. Ready to check docs?"
+`bugfix-fix` presents two numbered checkpoint menus internally. Wait for the user to select **[1] Looks good — check docs** at the second checkpoint before continuing to Phase 3. The sub-skill handles all other selections.
 
 ### Phase 3: Docs Update
 
 Use the Skill tool: `skill: "strapi-dev:docs-update"`
 
-**If updates needed:** "These docs reference the changed behavior. Approve the updates?"
-**If no updates needed:** "No documentation updates needed, moving on." (proceeds without pausing)
+`docs-update` presents numbered checkpoint menus internally when updates are found. Wait for the skill to complete before continuing to Phase 4. If no updates are needed, the skill exits silently and Phase 4 begins automatically.
 
 ### Phase 4: Obsidian Note
 
 Use the Skill tool: `skill: "strapi-dev:obsidian"`
 
-**Checkpoint:** "Here's the Obsidian note. Want to adjust anything before I save it?"
+`obsidian` presents a numbered checkpoint menu. Wait for the user to select **[1] Save as-is** or **[4] Skip** before continuing to Phase 5. The sub-skill handles all other selections.
 
 ### Phase 5: PR
 
 Use the Skill tool: `skill: "strapi-dev:pr"`
 
-**Checkpoint:** "Here's the PR description. Want to adjust anything before I create the PR?"
+`pr` presents a numbered checkpoint menu. Wait for the user to select **[1] Create the PR** before proceeding. The sub-skill handles all other selections.
 
 ## Error Handling
 
