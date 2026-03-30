@@ -105,7 +105,17 @@ If the Linear ticket has a priority field, map it: Urgent/High → critical, Med
 
 Show the complete note to the user before saving.
 
-**Checkpoint:** "Here's the Obsidian note. Want to adjust anything (content, tags, severity) before I save it?"
+**Checkpoint:** Present the complete note above, then show:
+
+```
+  [1] Save as-is
+  [2] Adjust content
+  [3] Adjust tags or severity
+  [4] Skip — don't save the note, continue workflow
+  [5] Stop here
+```
+
+Wait for the user's selection. If `[2]`, ask what to adjust, apply the changes, and re-present the note with the same menu. If `[3]`, ask which tags or severity to change, apply, and re-present. If `[4]`, skip saving and proceed to the next phase. If `[5]`, stop the workflow leaving no changes.
 
 ### Step 5: Save to Obsidian
 
