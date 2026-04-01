@@ -19,6 +19,8 @@ Restart Claude Code to load the plugin.
   - [Obsidian MCP](https://github.com/MarkusMaal/obsidian-mcp) — save bug notes to Obsidian
   - [Chrome DevTools MCP](https://github.com/anthropics/chrome-devtools-mcp) — reproduce frontend bugs
   - **GitHub MCP** — required for Strapi docs update (Router + Drafter pipeline); falls back to basic search without it
+  - **Playwright MCP** — executes Admin UI steps during PR manual testing; falls back to a printed checklist without it
+- [Bruno](https://www.usebruno.com/) — API client used during PR manual testing; collections are written to your Bruno folder automatically
 
 ---
 
@@ -50,7 +52,7 @@ Phases run in order with a checkpoint between each:
 
 ## PR Review Workflow
 
-Analyze a pull request across five dimensions.
+Analyze a pull request across seven dimensions.
 
 ```
 /strapi-dev:review-start https://github.com/strapi/strapi/pull/123
@@ -59,16 +61,20 @@ Analyze a pull request across five dimensions.
 
 Phases run in order with a checkpoint between each:
 
+0. **Smoke Test** — checks out the PR branch locally and runs automated tests for affected packages; flags failures before any analysis begins
 1. **Code vs Description** — reads every changed file and checks it against the PR description; flags missing or undocumented changes
 2. **Breaking Changes** — traces exports and package boundaries to assess user-facing impact
 3. **Alternative Approaches** — proposes 2–3 alternatives to the PR's approach with a recommendation
-4. **Bug Hunting** — looks for bugs in the changed code, proves each one with a failing test, applies a minimal fix, leaves all files unstaged for you to review
-5. **Docs Impact** — checks if the changes require documentation updates
+4. **Manual Testing** — follows the PR's "How to test" instructions: executes Admin UI steps via Playwright MCP and creates a Bruno API collection for HTTP request steps
+5. **Bug Hunting** — looks for bugs in the changed code, proves each one with a failing test, applies a minimal fix, leaves all files unstaged for you to review
+6. **Docs Impact** — checks if the changes require documentation updates
 
 ### Running phases individually
 
 ```
+/strapi-dev:review-smoke                                             # checkout + smoke test only
 /strapi-dev:review-analyze https://github.com/strapi/strapi/pull/123
+/strapi-dev:review-manual-test                                       # follow PR test instructions only
 /strapi-dev:review-bugs
 ```
 
