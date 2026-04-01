@@ -52,15 +52,16 @@ Use the Skill tool: `skill: "strapi-dev:issue-analyze"`, passing the pre-fetched
 
 ### Phase 2: Handle Verdict
 
-**`[1] Confirmed`** → Phase 2a: Fix Handoff
+`issue-analyze` handles its own checkpoint and returns a resolved verdict. Act on the verdict returned:
 
-**`[2] Not a bug` / `[3] Needs more info` / `[4] Duplicate`** → Phase 2b: Draft Response
-
-**`[5] Dig deeper`** → `issue-analyze` handles this internally and re-presents its checkpoint. Wait for the next selection.
-
-**`[6] I have corrections`** → `issue-analyze` handles this internally and re-presents its checkpoint. Wait for the next selection.
-
-**`[7] Stop`** → Stop the workflow cleanly. No further output.
+- **`confirmed`** → Phase 2a: Fix Handoff
+- **`not a bug`** → Phase 2b: Draft Response (not a bug)
+- **`needs more info`** → Phase 2b: Draft Response (needs more info)
+- **`duplicate`** → Phase 2b: Draft Response (duplicate)
+- **`feature request`** → Phase 2b: Draft Response (feature request)
+- **`question`** → Phase 2b: Draft Response (question)
+- **`docs gap`** → Phase 2b: Draft Response (docs gap)
+- **`stop`** → Stop the workflow cleanly. No further output.
 
 ### Phase 2a: Fix Handoff
 
@@ -108,12 +109,37 @@ Thanks for the report! This looks like a duplicate of #N — [title].
 You can track progress on the fix there. If you have any additional context or a different reproduction case not covered in that issue, feel free to add it there.
 ```
 
+**Feature request:**
+```
+Thanks for the suggestion! We've noted this as a feature request. 
+
+[One paragraph summarizing the requested capability and its potential value, based on triage findings.]
+
+We'll consider this for a future release. Feel free to add any additional context or use cases that would help us prioritize it.
+```
+
+**Question:**
+```
+Thanks for reaching out! [Answer or explanation based on triage analysis.]
+
+If this doesn't fully address your question, please let us know and we'll dig in further.
+```
+
+**Docs gap:**
+```
+Thanks for pointing this out! You're right that the documentation [description of the gap from triage].
+
+We'll update the docs to clarify this. If you'd like to contribute a fix, the docs live in [docs location if known].
+```
+
 Present the drafted comment, then show:
 ```
   [1] Looks good
   [2] Adjust wording
   [3] Skip — don't draft a comment
 ```
+
+If `[1]`, stop cleanly. The workflow is complete.
 
 Wait for the user's selection. If `[2]`, ask what to adjust, apply changes, and re-present with the same menu. If `[3]`, stop cleanly.
 
