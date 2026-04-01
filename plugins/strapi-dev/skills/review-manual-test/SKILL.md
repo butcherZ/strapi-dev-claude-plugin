@@ -10,6 +10,13 @@ Follow a PR's "How to test" instructions. Execute Admin UI steps via Playwright 
 
 ## Input
 
+The user provides: $ARGUMENTS
+
+Accepts one of:
+- **PR URL** (e.g., `https://github.com/strapi/strapi/pull/123`)
+- **PR number** (e.g., `123`)
+- **Nothing** — PR metadata is provided by the orchestrator
+
 **When run via orchestrator:** Receives PR metadata (title, body, number) from `review-start`.
 
 **When run standalone:** Ask the user for a PR URL or number, then fetch:
@@ -45,6 +52,8 @@ For each step found in the testing section, classify it as one of:
 - **API** — involves an HTTP request (GET, POST, PUT, DELETE, PATCH) or references an API endpoint
 - **Setup** — prerequisite action (create a content type, install a plugin, run a shell command)
 - **Verify** — check a result (confirm something appears in the UI, verify response contains a field)
+
+**Verify steps** are expected outcomes. Map each Verify step to the preceding UI or API step — include it as the assertion to check when executing that step, and record whether the outcome matched in the report.
 
 ### Step 3: Execute Setup Steps
 
@@ -131,19 +140,19 @@ Open Bruno and run the requests in sequence to execute the API steps.
 
 ### UI Steps (Playwright)
 - <step description> — passed / failed / manual
-  <error or confirmation detail>
+  Verify: <expected outcome> — matched / not matched
+  <error or screenshot detail>
 
 ### API Steps (Bruno)
 Collection: <bruno-collection-path>/pr-<number>/
 Files created:
-- <filename>.bru — <request name>
-- <filename>.bru — <request name>
+- <filename>.bru — <request name> (Verify: <expected outcome>)
 ```
 
 ## Checkpoint
 
 ```
-  [1] Looks good — continue to bug hunting
+  [1] Looks good — proceed
   [2] Re-run a specific step (specify which)
   [3] A step failed — investigate (specify which)
   [4] Stop here
@@ -153,12 +162,7 @@ Wait for the user's selection. If `[2]`, re-run the specified step, update the r
 
 ## Working Directory
 
-Before starting, resolve both paths from memory:
-
-**Strapi repo path:**
-1. Check Claude's memory for "strapi repo path"
-2. If not found → ask: "Where is your Strapi monorepo checked out? (e.g., `/path/to/strapi`)"
-3. Save to memory
+Before starting, resolve the Bruno collection path from memory:
 
 **Bruno collection path:**
 1. Check Claude's memory for "bruno collection path"
