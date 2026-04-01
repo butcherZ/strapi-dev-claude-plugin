@@ -1,6 +1,6 @@
 # strapi-dev — Claude Code Plugin
 
-Strapi development workflows for Claude Code: **bug fixing** and **PR review**. Both workflows run end-to-end with numbered option menus at every checkpoint — no free-form prompts.
+Strapi development workflows for Claude Code: **bug fixing**, **PR review**, and **issue triage**. All workflows run end-to-end with numbered option menus at every checkpoint — no free-form prompts.
 
 ## Installation
 
@@ -74,6 +74,31 @@ Phases run in order with a checkpoint between each:
 
 ---
 
+## Issue Triage Workflow
+
+Investigate a GitHub issue or Linear ticket, produce a triage verdict, and optionally hand off to the bug fix workflow.
+
+```
+/strapi-dev:issue-start CMS-123
+/strapi-dev:issue-start https://github.com/strapi/strapi/issues/456
+```
+
+Phases run in order with a checkpoint between each:
+
+1. **Triage Analysis** — fetches the issue, classifies its type (bug / feature request / question / docs gap), checks for duplicates, explores affected code, and attempts reproduction for bugs
+2. **Verdict & Response** — presents a triage verdict (confirmed / not a bug / needs more info / duplicate); drafts a response comment for you to copy and post manually
+3. **Fix Handoff** (confirmed bugs only) — optionally hands off to the bug fix workflow
+
+All response comments are displayed in the terminal for you to review and post — nothing is ever auto-posted to GitHub.
+
+### Running the triage phase individually
+
+```
+/strapi-dev:issue-analyze CMS-123   # triage only, with its own checkpoint
+```
+
+---
+
 ## Shared Skills
 
 These run as part of the workflows above but can also be invoked standalone.
@@ -92,7 +117,7 @@ Requires GitHub MCP for the Router + Drafter pipeline. Falls back to a basic `gh
 
 ### `/strapi-dev:obsidian`
 
-Generates a structured bug report note and saves it to your Obsidian vault. Covers: context, reproduction steps, root cause, fix, files changed, tests added, and verification steps. Asks for your vault path the first time and remembers it.
+Generates a structured bug report note and saves it to your Obsidian vault. Covers: context, reproduction steps, root cause, fix, files changed, tests added, and verification steps. Includes labels from the original issue. Asks for your vault path the first time and remembers it. You can also pass the path directly: `/strapi-dev:obsidian Notes/Strapi/bug-fix/`.
 
 ### `/strapi-dev:pr`
 
