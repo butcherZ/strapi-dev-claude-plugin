@@ -116,9 +116,9 @@ Skip this step for `feature request`, `question`, and `docs gap` types.
 **Checkpoint:**
 ```
   [1] Confirmed — proceed to fix
-  [2] Not a bug — draft a response comment
-  [3] Needs more info — draft a response comment
-  [4] Duplicate — draft a response comment
+  [2] Not a bug
+  [3] Needs more info
+  [4] Duplicate
   [5] Dig deeper into a specific area
   [6] Stop here
 ```
