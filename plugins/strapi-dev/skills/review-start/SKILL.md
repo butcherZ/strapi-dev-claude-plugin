@@ -153,7 +153,7 @@ Use the Skill tool: `skill: "strapi-dev:docs-update"`
 
 Pass the PR diff content as context so the skill can analyze without needing a local branch diff.
 
-`docs-update` handles its own numbered checkpoint menus internally. Wait for the skill to complete before presenting the final summary. No separate Phase 5 checkpoint is needed here.
+`docs-update` handles its own numbered checkpoint menus internally. Wait for the skill to complete before presenting the final summary. No separate Phase 6 checkpoint is needed here.
 
 ## Summary
 
@@ -194,12 +194,12 @@ When any phase fails:
 Specific fallbacks:
 - **`gh pr view` fails** → ask user to paste PR description manually
 - **`gh pr diff` fails** → ask user to provide the diff or ensure the branch is checked out locally
-- **Test infrastructure unavailable** (Phase 4) → report suspected bugs without proof, flag reduced confidence
+- **Test infrastructure unavailable** (Phase 5) → report suspected bugs without proof, flag reduced confidence
 
 ## Key Principles
 
 - **Read-only** — no commits, no pushes, no PRs created
-- **Exception:** Phase 4 may create test files and apply temporary fixes for verification, all left unstaged
+- **Exception:** Phase 5 may create test files and apply temporary fixes for verification, all left unstaged; Phase 4 creates Bruno collection files, also left in place
 - **Checkpoints are mandatory** — never skip user approval between phases
 - **Strapi-specific** — export tracing, package boundary checks, user-facing API analysis
 
