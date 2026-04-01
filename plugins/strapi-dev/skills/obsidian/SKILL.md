@@ -1,6 +1,7 @@
 ---
 name: obsidian
-description: Use after fixing a bug to create a structured Obsidian note documenting the bug, root cause, fix, and lessons learned. Saves to the Strapi bug-fix folder with auto-generated tags.
+description: Use after fixing a bug to create a structured Obsidian note documenting the bug, root cause, fix, and lessons learned. Saves to a user-configured vault folder with auto-generated tags.
+argument-hint: <vault-folder-path>
 ---
 
 # Obsidian Bug Documentation
@@ -29,10 +30,11 @@ Claude will prompt for any missing details needed to fill the template.
 
 Before generating the note, determine where to save it:
 
-1. **Check Claude's memory** for a previously saved vault path preference (search for memories about "obsidian vault path" or "bug notes folder")
-2. **If found** → use the remembered path
-3. **If not found** → ask the user: "Where in your Obsidian vault should I save bug notes? (e.g., `2 - Full Notes/Strapi/bug-fix/`)"
-4. **Save the user's answer to Claude's memory** so they are never asked again in future sessions
+1. **If a path was passed as an argument** (`$ARGUMENTS`) → use it directly
+2. **Otherwise, check Claude's memory** for a previously saved vault path preference (search for memories about "obsidian vault path" or "bug notes folder")
+3. **If found in memory** → use the remembered path
+4. **If not found** → ask the user: "Where in your Obsidian vault should I save bug notes? (e.g., `Notes/Strapi/bug-fix/`)"
+5. **Save the user's answer to Claude's memory** so they are never asked again in future sessions
 
 ## Process
 
@@ -45,15 +47,20 @@ Build the note following this template:
 {
   "title": "<ticket-id> <short description>",
   "type": "note",
-  "permalink": "full-notes/strapi/<slug>",
+  "permalink": "<vault-folder-slug>/<slug>",
   "tags": ["strapi", "bug", "<area>", "<component>"],
   "date": "YYYY-MM-DD",
   "ticket": "<ticket-id>",
   "source": "<linear or github URL>",
   "severity": "<critical|major|minor>",
-  "status": "resolved"
+  "status": "resolved",
+  "labels": ["<label-1>", "<label-2>"]
 }
 ```
+
+The `permalink` is derived from the resolved vault folder path: convert it to lowercase, replace spaces with hyphens, strip leading/trailing slashes, then append `/<slug>`.
+
+For example: `Notes/Strapi/bug-fix/` → `notes/strapi/bug-fix/<slug>`
 
 **Body:**
 ```markdown
