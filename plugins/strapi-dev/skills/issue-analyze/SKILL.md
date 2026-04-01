@@ -55,8 +55,10 @@ This classification controls which subsequent steps run.
 ### Step 3: Check for Duplicates
 
 ```bash
-gh search issues "<3-5 keywords from issue title>" --repo strapi/strapi --state open --limit 5
+gh search issues "<3-5 keywords from issue title>" --repo <owner/repo> --state open --limit 5
 ```
+
+Use the repo extracted from the GitHub issue URL. For Linear tickets or plain text input, default to `strapi/strapi`.
 
 Report any close matches with their issue numbers and titles. If the search fails or returns no results, note it and continue.
 
@@ -112,18 +114,20 @@ Skip this step for `feature request`, `question`, and `docs gap` types.
 - `major` — feature partially broken, workaround exists but is painful
 - `minor` — cosmetic issue, edge case, or low-impact behavior
 - `N/A` — feature request, question, or docs gap
+- `unknown` — when the verdict is `needs more info` or `duplicate`, use this (reproduction insufficient to assess, or defers to the original issue's severity)
 
 **Checkpoint:**
 ```
-  [1] Confirmed — proceed to fix
+  [1] Confirmed
   [2] Not a bug
   [3] Needs more info
   [4] Duplicate
   [5] Dig deeper into a specific area
-  [6] Stop here
+  [6] I have corrections (describe them)
+  [7] Stop here
 ```
 
-Wait for the user's selection. If `[5]`, investigate the specified area and re-present the triage verdict with the same menu. If `[6]`, stop with no changes made.
+Wait for the user's selection. If `[5]`, investigate the specified area and re-present the triage verdict with the same menu. If `[6]`, incorporate the corrections, re-classify if needed, and re-present the triage verdict with the same menu. If `[7]`, stop with no changes made.
 
 ## Key Principle
 
