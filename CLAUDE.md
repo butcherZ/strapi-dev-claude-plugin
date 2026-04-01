@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A Claude Code plugin (`strapi-dev`) providing three end-to-end development workflows for Strapi contributors:
 
 1. **Bug Fix Workflow** — `bugfix-start` → `bugfix-analyze` → `bugfix-fix` → `docs-update` → `obsidian` → `pr`
-2. **PR Review Workflow** — `review-start` → `review-analyze` → `review-bugs` → `docs-update`
+2. **PR Review Workflow** — `review-start` → `review-smoke` → `review-analyze` → `review-manual-test` → `review-bugs` → `docs-update`
 3. **Issue Triage Workflow** — `issue-start` → `issue-analyze` → optional handoff to `bugfix-start`
 
 The plugin has no executable code. It is entirely implemented as Claude Code skills (Markdown files with YAML frontmatter). There are no tests, no build steps, and no npm dependencies to install.
@@ -29,6 +29,8 @@ plugins/strapi-dev/
     pr/
     review-start/
     review-analyze/
+    review-smoke/
+    review-manual-test/
     review-bugs/
 docs/superpowers/
   plans/                       # Implementation plans for past/future features
@@ -77,9 +79,10 @@ The `name` field must match the skill's directory name. The `description` is wha
 
 ## Versioning
 
-Plugin version lives in two places — keep them in sync when bumping:
+Plugin version lives in three places — keep them all in sync when bumping:
 - `plugins/strapi-dev/.claude-plugin/plugin.json` → `"version"`
 - `plugins/strapi-dev/package.json` → `"version"`
+- `.claude-plugin/marketplace.json` → `"plugins[0].version"`
 
 ## Key Tool Integrations
 
@@ -89,3 +92,5 @@ Skills rely on these external tools being available in the user's environment:
 - GitHub MCP server — optional, used by `docs-update` for Router + Drafter pipeline
 - Obsidian MCP server — optional, used by `obsidian` skill to save notes
 - Chrome DevTools MCP — optional, used by `bugfix-analyze` for frontend reproduction
+- Playwright MCP — optional, used by `review-manual-test` for Admin UI test execution
+- Bruno API client — optional, used by `review-manual-test` to create API test collections; path stored in memory as `bruno collection path`
