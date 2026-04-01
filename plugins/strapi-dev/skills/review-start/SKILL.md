@@ -49,6 +49,23 @@ Execute each phase in order. Use the Skill tool to invoke each phase. After each
 
 **IMPORTANT:** Maintain all context gathered from previous phases and pass it forward to each subsequent phase. Each phase builds on the information from the ones before it.
 
+### Phase 0: Smoke Test
+
+Use the Skill tool: `skill: "strapi-dev:review-smoke"`
+
+Pass the PR number and any available diff context.
+
+**Checkpoint:** Present the smoke test results above, then show:
+
+```
+  [1] All good — continue to code analysis
+  [2] Investigate a test failure (specify which)
+  [3] Skip and continue anyway
+  [4] Stop here
+```
+
+Wait for the user's selection. If `[2]`, ask review-smoke to investigate the specified failure. If `[3]`, note skipped tests in the running context and continue. If `[4]`, stop the review.
+
 ### Phase 1: Code vs Description
 
 Use the Skill tool: `skill: "strapi-dev:review-analyze", args: "pass:1 <PR-metadata>"`
@@ -96,7 +113,24 @@ Use the Skill tool: `skill: "strapi-dev:review-analyze", args: "pass:3 <PR-metad
 
 Wait for the user's selection. If `[2]`, explore the specified alternative in more depth and re-present. If `[3]`, discuss the disagreement and revise the recommendation if warranted, then re-present. If `[4]`, stop the review.
 
-### Phase 4: Bug Hunting
+### Phase 4: Manual Testing
+
+Use the Skill tool: `skill: "strapi-dev:review-manual-test"`
+
+Pass the PR number and the full PR body so the skill can parse testing instructions without re-fetching.
+
+**Checkpoint:** Present the manual test results above, then show:
+
+```
+  [1] Looks good — continue to bug hunting
+  [2] Re-run a specific step (specify)
+  [3] A step failed — investigate (specify)
+  [4] Stop here
+```
+
+Wait for the user's selection. If `[2]` or `[3]`, pass the detail to review-manual-test and re-present with the same menu. If `[4]`, stop, leaving all Bruno files in place.
+
+### Phase 5: Bug Hunting
 
 Use the Skill tool: `skill: "strapi-dev:review-bugs"`
 
@@ -113,7 +147,7 @@ Pass all accumulated context: PR metadata, analysis findings, breaking change as
 
 Wait for the user's selection. If `[2]`, investigate the specified area and update the bug report, then re-present with the same menu. If `[3]`, re-examine the disputed bug and remove it from the report if unconfirmed, then re-present. If `[4]`, stop the review.
 
-### Phase 5: Documentation Impact
+### Phase 6: Documentation Impact
 
 Use the Skill tool: `skill: "strapi-dev:docs-update"`
 
@@ -128,6 +162,9 @@ After all phases complete, present a consolidated summary:
 ```
 ## PR Review Summary: #<number> — <title>
 
+### Smoke Test: <passed / failed / skipped>
+<one-line summary>
+
 ### Code Match: <match / partial match / mismatch>
 <one-line summary>
 
@@ -135,6 +172,9 @@ After all phases complete, present a consolidated summary:
 <one-line summary>
 
 ### Alternatives: <current approach is best / consider alternative X>
+<one-line summary>
+
+### Manual Tests: <passed / partial / skipped — no instructions found>
 <one-line summary>
 
 ### Bugs Found: <N bugs found / no bugs found>
