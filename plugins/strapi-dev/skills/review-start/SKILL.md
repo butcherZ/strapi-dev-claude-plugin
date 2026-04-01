@@ -163,4 +163,11 @@ Specific fallbacks:
 - **Checkpoints are mandatory** — never skip user approval between phases
 - **Strapi-specific** — export tracing, package boundary checks, user-facing API analysis
 
-Work from: /Users/ziyi/Work/claude-bugfix-workflow
+## Working Directory
+
+Before starting, resolve the Strapi monorepo path:
+
+1. **Check Claude's memory** for a previously saved Strapi repo path (search for "strapi repo path" or "strapi monorepo")
+2. **If found** → use that path as the base for all file operations
+3. **If not found** → ask the user: "Where is your Strapi monorepo checked out? (e.g., `/path/to/strapi`)"
+4. **Save the user's answer to Claude's memory** so they are never asked again
