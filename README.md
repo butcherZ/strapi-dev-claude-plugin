@@ -5,8 +5,8 @@ Strapi development workflows for Claude Code: **bug fixing**, **PR review**, and
 ## Installation
 
 ```bash
-claude plugin marketplace add https://github.com/butcherZ/claude-bugfix-workflow
-claude plugin install strapi-dev@claude-bugfix-workflow
+claude plugin marketplace add https://github.com/butcherZ/strapi-dev-claude-plugin
+claude plugin install strapi-dev@strapi-dev-claude-plugin
 ```
 
 Restart Claude Code to load the plugin.
@@ -128,8 +128,8 @@ Reads the repo's PR template, fills it from the fix context (what changed, why, 
 ## Uninstall
 
 ```bash
-claude plugin uninstall strapi-dev@claude-bugfix-workflow
-claude plugin marketplace remove claude-bugfix-workflow
+claude plugin uninstall strapi-dev@strapi-dev-claude-plugin
+claude plugin marketplace remove strapi-dev-claude-plugin
 ```
 
 ## License

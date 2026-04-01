@@ -5,8 +5,8 @@
   "author": {
     "name": "butcherZ"
   },
-  "homepage": "https://github.com/butcherZ/claude-bugfix-workflow",
-  "repository": "https://github.com/butcherZ/claude-bugfix-workflow",
+  "homepage": "https://github.com/butcherZ/strapi-dev-claude-plugin",
+  "repository": "https://github.com/butcherZ/strapi-dev-claude-plugin",
   "license": "MIT",
   "keywords": ["strapi", "bugfix", "review", "workflow", "linear", "obsidian", "debugging"]
 }
