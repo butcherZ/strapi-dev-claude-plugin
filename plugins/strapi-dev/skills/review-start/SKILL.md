@@ -139,7 +139,7 @@ Pass all accumulated context: PR metadata, analysis findings, breaking change as
 **Checkpoint:** Present the bug report above, then show:
 
 ```
-  [1] Continue to docs check
+  [1] Continue to fix proposals
   [2] Investigate another area for bugs (specify)
   [3] Dispute a reported bug (specify which)
   [4] Stop here
@@ -147,13 +147,21 @@ Pass all accumulated context: PR metadata, analysis findings, breaking change as
 
 Wait for the user's selection. If `[2]`, investigate the specified area and update the bug report, then re-present with the same menu. If `[3]`, re-examine the disputed bug and remove it from the report if unconfirmed, then re-present. If `[4]`, stop the review.
 
-### Phase 6: Documentation Impact
+### Phase 6: Fix Proposals
+
+Use the Skill tool: `skill: "strapi-dev:review-comments"`
+
+Pass all accumulated context: PR metadata, full diff, and findings from Phases 1–5.
+
+`review-comments` handles its own checkpoint menu internally. Wait for the skill to complete before proceeding to Phase 7.
+
+### Phase 7: Documentation Impact
 
 Use the Skill tool: `skill: "strapi-dev:docs-update"`
 
 Pass the PR diff content as context so the skill can analyze without needing a local branch diff.
 
-`docs-update` handles its own numbered checkpoint menus internally. Wait for the skill to complete before presenting the final summary. No separate Phase 6 checkpoint is needed here.
+`docs-update` handles its own numbered checkpoint menus internally. Wait for the skill to complete before presenting the final summary. No separate Phase 7 checkpoint is needed here.
 
 ## Summary
 
@@ -179,6 +187,9 @@ After all phases complete, present a consolidated summary:
 
 ### Bugs Found: <N bugs found / no bugs found>
 <one-line summary per bug>
+
+### Fix Proposals: <N comments generated / skipped>
+<one-line summary>
 
 ### Docs Impact: <no updates needed / updates needed>
 <one-line summary>
