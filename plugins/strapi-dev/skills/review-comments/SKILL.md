@@ -16,6 +16,7 @@ Generate ready-to-post GitHub review comments by synthesizing earlier phase find
 - Phase 2 findings (breaking change assessment)
 - Phase 3 findings (alternative approaches considered)
 - Phase 5 findings (confirmed bugs + fixes)
+- Phase 4 (manual testing) findings are not passed — manual test results inform bug hunting but are not directly synthesized into comments
 
 ## Process
 
@@ -75,6 +76,12 @@ consequence. Conversational tone. Emojis welcome.>
 - "This could be `null` if the content type has no lifecycle hooks — worth a guard here."
 
 End with: `**N comments generated**`
+
+**If no comments remain after deduplication**, output:
+
+```
+**0 comments generated** — diff reviewed; no actionable suggestions beyond what earlier phases already covered.
+```
 
 ## Checkpoint
 
