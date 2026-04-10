@@ -6,7 +6,7 @@ argument-hint: <pr-url>
 
 # PR Review Workflow
 
-Review a pull request through 7 phases with user checkpoints between each. Strapi monorepo focused.
+Review a pull request through 8 phases with user checkpoints between each. Strapi monorepo focused.
 
 ## Input
 
