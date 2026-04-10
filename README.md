@@ -52,7 +52,7 @@ Phases run in order with a checkpoint between each:
 
 ## PR Review Workflow
 
-Analyze a pull request across seven dimensions.
+Analyze a pull request across eight dimensions.
 
 ```
 /strapi-dev:review-start https://github.com/strapi/strapi/pull/123
@@ -67,7 +67,8 @@ Phases run in order with a checkpoint between each:
 3. **Alternative Approaches** — proposes 2–3 alternatives to the PR's approach with a recommendation
 4. **Manual Testing** — follows the PR's "How to test" instructions: executes Admin UI steps via Playwright MCP and creates a Bruno API collection for HTTP request steps
 5. **Bug Hunting** — looks for bugs in the changed code, proves each one with a failing test, applies a minimal fix, leaves all files unstaged for you to review
-6. **Docs Impact** — checks if the changes require documentation updates
+6. **Fix Proposals** — synthesizes all findings into ready-to-post GitHub review comments with friendly, reasoning-forward tone
+7. **Docs Impact** — checks if the changes require documentation updates
 
 ### Running phases individually
 

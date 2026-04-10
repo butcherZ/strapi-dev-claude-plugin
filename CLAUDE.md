@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A Claude Code plugin (`strapi-dev`) providing three end-to-end development workflows for Strapi contributors:
 
 1. **Bug Fix Workflow** — `bugfix-start` → `bugfix-analyze` → `bugfix-fix` → `docs-update` → `obsidian` → `pr`
-2. **PR Review Workflow** — `review-start` → `review-smoke` → `review-analyze` → `review-manual-test` → `review-bugs` → `docs-update`
+2. **PR Review Workflow** — `review-start` → `review-smoke` → `review-analyze` → `review-manual-test` → `review-bugs` → `review-comments` → `docs-update`
 3. **Issue Triage Workflow** — `issue-start` → `issue-analyze` → optional handoff to `bugfix-start`
 
 The plugin has no executable code. It is entirely implemented as Claude Code skills (Markdown files with YAML frontmatter). There are no tests, no build steps, and no npm dependencies to install.
