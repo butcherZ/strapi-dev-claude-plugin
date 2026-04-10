@@ -32,6 +32,7 @@ plugins/strapi-dev/
     review-smoke/
     review-manual-test/
     review-bugs/
+    review-comments/
 docs/superpowers/
   plans/                       # Implementation plans for past/future features
   specs/                       # Design specifications
