@@ -75,8 +75,8 @@ Phases run in order with a checkpoint between each:
 ```
 /strapi-dev:review-smoke                                             # checkout + smoke test only
 /strapi-dev:review-analyze https://github.com/strapi/strapi/pull/123
+/strapi-dev:review-bugs                                              # bug hunting only
 /strapi-dev:review-manual-test                                       # follow PR test instructions only
-/strapi-dev:review-bugs
 ```
 
 ---
