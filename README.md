@@ -132,6 +132,14 @@ Reads the repo's PR template, fills it from the fix context (what changed, why, 
 
 ---
 
+## Update
+
+```bash
+claude plugin update strapi-dev@strapi-dev-claude-plugin
+```
+
+Restart Claude Code to apply the update.
+
 ## Uninstall
 
 ```bash
