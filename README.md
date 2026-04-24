@@ -65,9 +65,9 @@ Phases run in order with a checkpoint between each:
 1. **Code vs Description** — reads every changed file and checks it against the PR description; flags missing or undocumented changes
 2. **Breaking Changes** — traces exports and package boundaries to assess user-facing impact
 3. **Alternative Approaches** — proposes 2–3 alternatives to the PR's approach with a recommendation
-4. **Manual Testing** — follows the PR's "How to test" instructions: executes Admin UI steps via Playwright MCP and creates a Bruno API collection for HTTP request steps
-5. **Bug Hunting** — looks for bugs in the changed code, proves each one with a failing test, applies a minimal fix, leaves all files unstaged for you to review
-6. **Fix Proposals** — synthesizes all findings into ready-to-post GitHub review comments with friendly, reasoning-forward tone
+4. **Bug Hunting** — looks for bugs in the changed code, proves each one with a failing test, applies a minimal fix, leaves all files unstaged for you to review
+5. **Fix Proposals** — synthesizes all findings into ready-to-post GitHub review comments with friendly, reasoning-forward tone
+6. **Manual Testing** *(optional)* — follows the PR's "How to test" instructions: executes Admin UI steps via Playwright MCP and creates a Bruno API collection for HTTP request steps; can be skipped if static analysis was sufficient
 7. **Docs Impact** — checks if the changes require documentation updates
 
 ### Running phases individually

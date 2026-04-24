@@ -113,24 +113,7 @@ Use the Skill tool: `skill: "strapi-dev:review-analyze", args: "pass:3 <PR-metad
 
 Wait for the user's selection. If `[2]`, explore the specified alternative in more depth and re-present. If `[3]`, discuss the disagreement and revise the recommendation if warranted, then re-present. If `[4]`, stop the review.
 
-### Phase 4: Manual Testing
-
-Use the Skill tool: `skill: "strapi-dev:review-manual-test"`
-
-Pass the PR number and the full PR body so the skill can parse testing instructions without re-fetching.
-
-**Checkpoint:** Present the manual test results above, then show:
-
-```
-  [1] Looks good — continue to bug hunting
-  [2] Re-run a specific step (specify)
-  [3] A step failed — investigate (specify)
-  [4] Stop here
-```
-
-Wait for the user's selection. If `[2]` or `[3]`, pass the detail to review-manual-test and re-present with the same menu. If `[4]`, stop, leaving all Bruno files in place.
-
-### Phase 5: Bug Hunting
+### Phase 4: Bug Hunting
 
 Use the Skill tool: `skill: "strapi-dev:review-bugs"`
 
@@ -147,13 +130,31 @@ Pass all accumulated context: PR metadata, analysis findings, breaking change as
 
 Wait for the user's selection. If `[2]`, investigate the specified area and update the bug report, then re-present with the same menu. If `[3]`, re-examine the disputed bug and remove it from the report if unconfirmed, then re-present. If `[4]`, stop the review.
 
-### Phase 6: Fix Proposals
+### Phase 5: Fix Proposals
 
 Use the Skill tool: `skill: "strapi-dev:review-comments"`
 
-Pass all accumulated context: PR metadata, full diff, and findings from Phases 1–5.
+Pass all accumulated context: PR metadata, full diff, and findings from Phases 1–4.
 
-`review-comments` handles its own checkpoint menu internally. Wait for the skill to complete before proceeding to Phase 7.
+`review-comments` handles its own checkpoint menu internally. Wait for the skill to complete before proceeding to Phase 6.
+
+### Phase 6: Manual Testing (Optional)
+
+Use the Skill tool: `skill: "strapi-dev:review-manual-test"`
+
+Pass the PR number and the full PR body so the skill can parse testing instructions without re-fetching.
+
+**Checkpoint:** Present the manual test results above, then show:
+
+```
+  [1] Looks good — continue to docs check
+  [2] Re-run a specific step (specify)
+  [3] A step failed — investigate (specify)
+  [4] Skip — static analysis was sufficient
+  [5] Stop here
+```
+
+Wait for the user's selection. If `[2]` or `[3]`, pass the detail to review-manual-test and re-present with the same menu. If `[4]`, note skipped in the running context and continue to Phase 7. If `[5]`, stop, leaving all Bruno files in place.
 
 ### Phase 7: Documentation Impact
 
@@ -182,13 +183,13 @@ After all phases complete, present a consolidated summary:
 ### Alternatives: <current approach is best / consider alternative X>
 <one-line summary>
 
-### Manual Tests: <passed / partial / skipped — no instructions found>
-<one-line summary>
-
 ### Bugs Found: <N bugs found / no bugs found>
 <one-line summary per bug>
 
 ### Fix Proposals: <N comments generated / skipped>
+<one-line summary>
+
+### Manual Tests: <passed / partial / skipped — no instructions found>
 <one-line summary>
 
 ### Docs Impact: <no updates needed / updates needed>

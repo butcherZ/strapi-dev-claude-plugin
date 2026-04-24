@@ -15,15 +15,14 @@ Generate ready-to-post GitHub review comments by synthesizing earlier phase find
 - Phase 1 findings (code vs description match)
 - Phase 2 findings (breaking change assessment)
 - Phase 3 findings (alternative approaches considered)
-- Phase 5 findings (confirmed bugs + fixes)
-- Phase 4 (manual testing) findings are not passed — manual test results inform bug hunting but are not directly synthesized into comments
+- Phase 4 findings (confirmed bugs + fixes)
 
 ## Process
 
 ### Step 1: Consolidate Prior Findings
 
 Build a working list from:
-- **Phase 5 bugs** — each confirmed bug becomes a candidate comment
+- **Phase 4 bugs** — each confirmed bug becomes a candidate comment
 - **Phase 2 breaking changes** — each user-facing behavior change worth highlighting becomes a candidate
 - **Phase 3 alternatives** — if a simpler approach was identified, it becomes a candidate
 
@@ -101,4 +100,4 @@ End with: `**N comments generated**`
 - **Display only** — never post comments to GitHub
 - **Friendly reasoning** — always explain why before proposing what
 - **Specific citations** — name the exact variable, line, or behavior
-- **No duplication** — if Phase 5 already proved a bug with a test, reference it; don't re-explain the test
+- **No duplication** — if Phase 4 already proved a bug with a test, reference it; don't re-explain the test
